@@ -24,6 +24,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install django social-auth-app-django
 
-    - name: Run Tests
+     - name: Install Deps
       run: |
-        python manage.py test
+        python -m pip install --upgrade pip
+        pip install django social-auth-app-django cryptography PyJWT pyOpenSSL

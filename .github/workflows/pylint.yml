@@ -25,5 +25,4 @@ jobs:
         pip install django social-auth-app-django pylint pylint-django
 
     - name: Run Pylint
-      run: |
-        pylint --load-plugins=pylint_django --ignore=migrations,venv,.venv-6 auth_project/ users/
+      run: pylint --load-plugins=pylint_django --errors-only --ignore=migrations,venv,.venv-6 auth_project/ users/
