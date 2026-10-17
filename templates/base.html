@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Auth Project</title>
+</head>
+<body>
+    <nav style="padding: 10px; background: #f0f0f0; margin-bottom: 20px;">
+        {% if user.is_authenticated %}
+            <div>Привет, <strong>{{ user.username }}</strong>!</div>
+            <div><a href="{% url 'users:logout' %}">Выйти</a></div>
+        {% else %}
+            <!-- Ссылки навигации -->
+            <div style="margin-bottom: 10px;">
+                <a href="{% url 'users:home' %}">Главная</a> | 
+                <a href="{% url 'users:login' %}">Логин</a>
+            </div>
+            
+            <!-- Форма входа через VK -->
+            <div style="margin-bottom: 5px;">
+                <form action="{% url 'social:begin' 'vk-oauth2' %}" method="POST" style="display: inline-block;">
+                    {% csrf_token %}
+                    <button type="submit" style="background: #0077FF; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer;">
+                        Войти через VK
+                    </button>
+                </form>
+            </div>
+
+            <!-- Форма входа через Google -->
+            <div>
+                <form action="{% url 'social:begin' 'google-oauth2' %}" method="POST" style="display: inline-block;">
+                    {% csrf_token %}
+                    <button type="submit" style="background: #EA4335; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer;">
+                        Войти через Google
+                    </button>
+                </form>
+            </div>
+        {% endif %}
+    </nav>
+
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>
